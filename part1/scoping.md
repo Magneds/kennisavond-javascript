@@ -82,4 +82,4 @@ Download nu de kennisavond-javascript repo:
 ```bash
 $ git clone https://github.com/Magneds/kennisavond-javascript
 ```
-en fix het script in part1/hands-on-scoping/application.js, er zitten wat bugs in! Bonuspunten als je het helemaal netjes fixt want dit kan natuurlijk niet zo!
+en fix het script in part1/hands-on-scoping/application.js, er zitten wat bugs in! Bonuspunten als je het helemaal netjes fixed want dit kan natuurlijk niet zo!
