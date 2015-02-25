@@ -7,7 +7,7 @@
 	function add() {
 		var item = document.createElement('li');
 
-		item.textContent = target.value;
+		item.textContent = value;
 		todoList.querySelector('ul').appendChild(item);
 	}
 
@@ -16,7 +16,8 @@
 	}
 
 	todoList.addEventListener('keyup', function(e) {
-		var target = e.target;
+		var target = e.target,
+			value = target.value;
 
 		if (e.which === 13)
 			add();

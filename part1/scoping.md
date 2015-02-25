@@ -11,8 +11,8 @@ var a = 'a',
 
 function scopeMe()
 {
-	console.log(a); // undefined
 	// function scope
+	console.log(a); // undefined (hoisting)
 	var a = false,
 		c = 'c';
 
@@ -25,9 +25,25 @@ console.log(a, b); // a, b
 console.log(c); // ReferenceError: c is not defined
 ```
 
-Zoals je ziet wordt `a` zowel in de globale scope als in de *function scope* gedeclareerd en kan de function bij de globale scope maar de globale scope niet bij de scope die wordt gecreëerd door de functie. De declaratie van `a` binnen de function zorgt ervoor dar er een *nieuwe* variabele wordt gedeclareerd die geldend is binnen die scope.
+Zoals je ziet wordt `a` zowel in de globale scope als in de *function scope* gedeclareerd en kan de function bij de globale scope maar de globale scope niet bij de scope die wordt gecreëerd door de functie. De declaratie van `a` binnen de function zorgt ervoor dat er een *nieuwe* variabele wordt gedeclareerd die geldend is binnen die scope.
 De scope "bubbelt" dus als het ware omhoog.
 Maar zoals je ziet is er een kleine kanttekening: de eerste `console.log` in scopeMe geeft je `undefined` als output, dit komt door "hoisting", dat is "het naar boven halen" van variabelen binnen de scope. Compile-time worden alle variabelen binnen de scope verzameld en in één keer gedeclareerd. Omdat `a` opnieuw wordt gedeclareerd trekt de compiler het reserveren van het geheugen voor de variabele omhoog. Dit is waarom we variabelen altijd aan het begin van de scope declareren, om verwarring te voorkomen.
+
+```javascript
+function scopeMe()
+{
+	// the compiler first hoists the variables to the top op the scope
+	var a, b;
+
+	console.log(a); // undefined
+
+	// then sets the values
+	a = false;
+	b = 'b';
+
+	console.log(a, b); // false, b
+}
+```
 
 Verder kun je hier als belangrijke les uit trekken dat je de globale scope "schoon" moet houden door er niet onnodig variabelen in te declareren (dit geld overigens voor iedere scope). Je kunt er namelijk vanuit ieder punt in de applicatie bij om uit te lezen of te veranderen. Wanneer iemand bijvoorbeeld een script weet te injecteren om al je globale variabelen uit te lezen of te modificeren vormt dat een groot risico! Zorg er dus voor dat alles ook echt zijn eigen scope heeft.
 
@@ -66,4 +82,4 @@ Download nu de kennisavond-javascript repo:
 ```bash
 $ git clone https://github.com/Magneds/kennisavond-javascript
 ```
-en fix het script in hands-on-scoping/application.js, er zitten wat bugs in! Bonuspunten als je het helemaal netjes fixt want dit kan natuurlijk niet zo!
+en fix het script in part1/hands-on-scoping/application.js, er zitten wat bugs in! Bonuspunten als je het helemaal netjes fixt want dit kan natuurlijk niet zo!

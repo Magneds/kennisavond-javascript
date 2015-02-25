@@ -5,6 +5,7 @@
 Vroeger waren er nog de prachtigste hobby sites met dwarrelende sneeuwvlokjes en roll-overs op buttons, tegenwoordig kunnen we prima spreken van een taal die volwassen genoeg is om zowel krachtige document stores (zoals MongoDB) als smartphones te besturen.
 
 JavaScript kom je onder andere tegen in:
+
 - MacOS (AppleScript heeft tegenwoordig een JavaScript variant)
 - Browsers
 - MongoDB
