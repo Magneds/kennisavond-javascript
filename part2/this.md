@@ -117,7 +117,30 @@ foo(); // 2
 bar(); // TypeError: this is undefined
 ```
 
-## Hands on 1
+## Function.prototype.bind
+
+`bind` maakt een nieuwe functie welke bij aanroep de `this` krijgt die opgegeven is als eerste argument bij het aanmaken van de functie.
+
+```javascript
+var Button = function(content) {
+  this.content = content;
+};
+
+Button.prototype.click = function() {
+  console.log(this.content + ' clicked');
+}
+
+var myButton = new Button('OK');
+myButton.click();
+
+var looseClick = myButton.click;
+looseClick(); // not bound, 'this' is not myButton
+
+var boundClick = myButton.click.bind(myButton);
+boundClick(); // bound, 'this' is myButton
+```
+
+## Hands on this
 
 ```bash
 $ git clone https://github.com/Magneds/kennisavond-javascript
