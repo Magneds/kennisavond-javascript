@@ -1,6 +1,6 @@
 # Prototype
 
-`prototype` is simpel gezegd de onzichtbare ketting tussen objecten. Elk object in JavaScript heeft een `prototype` attribute (soms te zien als `__proto__` in de devTools). Zodra er iets aangeroepen wordt in een object en datgene kan niet gevonden worden in het object, dan gaat hij de prototype-ketting aflopen naarboven toe om te kijken of dat de property daar wel gevonden kan worden.
+`prototype` is simpel gezegd de onzichtbare ketting tussen objecten, de prototype-chain. Elk object in JavaScript heeft een `prototype` attribute (soms te zien als `__proto__` in de devTools). Zodra er iets aangeroepen wordt in een object en datgene kan niet gevonden worden in het object, dan gaat hij de prototype-ketting aflopen om te kijken of dat de property daar wel gevonden kan worden.
 
 Tevens hebben alle objecten de `Object.prototype` bovenaan de prototype-ketting. Dit verklaart waarom je vanuit alle objecten bij bijv. `.toString()` en `.valueOf()` kunt.
 
@@ -9,9 +9,13 @@ var object = {};
 console.log(object.toString()); // [object Object]
 ```
 
-Aan een prototype kun je dingen aan toevoegen, net zoals bij een object in JavaScript. Door het linken van objecten zou je dus object properties door kunnen spelen naar andere objecten.
+Aan een prototype kun je dingen toevoegen, net zoals bij een object in JavaScript. Door het linken van objecten zou je dus object properties door kunnen spelen naar andere objecten.
 
-Een simpel voorbeeldje voor het linken van objecten
+## Object.create
+
+Naast een aantal standaard functies zoals `Object.keys` en `Object.defineProperty` bestaat er ook de functie `Object.create`. Met deze functie kan je een object als het ware kopieren, met als basis een link naar het opgegeven object. Op deze manier kan het nieuwe object wel bij de properties van het originele object.
+
+Een simpel voorbeeldje voor het linken van objecten is door het gebruik van `Object.create`.
 
 ```javascript
 var foo = {
@@ -20,9 +24,13 @@ var foo = {
 
 var bar = Object.create(foo);
 
-console.log(bar); // 'example'
+console.log(bar); // Object {a: "example"}
 console.log(bar.a); // 'example'
 ```
+
+_FYI: de hierboven beschreven functies zijn wel IE9+ en hebben voor IE8 en lager een polyfill nodig, dus let hierop._
+
+## Prototype-linking
 
 Belangrijk is om te weten dat bij het aanmaken van `a` en `b` in het voorbeeld hieronder, de functie `myName` niet gekopieerd wordt naar de desbetreffende objecten, maar dat de objecten een link bevatten naar `Foo.prototype`.
 
@@ -59,7 +67,7 @@ var kid = Object.create(papa);
 var child = Object.create(Person.prototype);
 
 console.log(kid.getName());        // Adam
-console.log(typeof child.getName); // Function
+console.log(typeof child.getName); // function
 console.log(typeof child.name);    // undefined
 ```
 
